@@ -43,7 +43,7 @@ post '/reply' do
       @route = "Error creating account"
       erb :debug
     end
-  elsif body[0].match(/\d{10}/) && body[1].match(/\d+/)
+  elsif body[0] == "send".downcase && body[1].match(/\d+/) && body[-1].match(/\d{10}/)
     #start sending money
     send_password_text
     @route = "Start sending money"
