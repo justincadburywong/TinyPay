@@ -8,27 +8,11 @@ helpers do
   from_number = params["From"]
   twilio_number = "14152752620"
 
-    client.account.messages.create(
-      :from => twilio_number,
-      :to => from_number,
-      :body => "Hello there, thanks for texting me. Your number is #{from_number}."
-    )
-  end
-
-  def send_join_text
-    account_sid = TWILIO_SID
-    auth_token = TWILIO_TOKEN
-    client = Twilio::REST::Client.new account_sid, auth_token
-    @event = Event.find(@guest.event_id)
-    @host = User.find(@event.host_id)
-    from = "4152752620"
-
-      client.account.messages.create(
-        :from => from,
-        :to => current_user.phone,
-        :body => "This is a reminder that you've joined #{@host.first_name}'s event!  Don't forget to be available at #{@event.start_time}"
-      )
-      puts "Sent message to #{current_user.first_name} / #{current_user.phone}."
+  client.account.messages.create(
+    :from => twilio_number,
+    :to => from_number,
+    :body => "Hello there, thanks for texting me. Your number is #{from_number}."
+  )
   end
 
   def setup
