@@ -23,7 +23,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change password code, reply with 'ChangePassword'. Reply 'STOP' to unsubscribe."
+      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as 'Send 20.09 to 4155558551'. To change password code, reply with 'ChangePassword'. Reply 'STOP' to unsubscribe."
       )
   end
 
@@ -60,7 +60,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "You're ready to start sending money! To send money, reply with the 10 digit phone number and dollar amount, like this: 4155558551 20.09."
+      :body => "To send money, reply with the keyword 'Send' and the dollar amount to a 10 digit phone number, like this: Send 20.09 to 4155558551."
       )
   end
 
