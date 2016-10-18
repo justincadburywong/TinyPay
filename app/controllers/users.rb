@@ -1,4 +1,4 @@
-users.# aka Register
+# users aka Register
 get '/users/new' do
   erb :'users/new'
 end
