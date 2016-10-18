@@ -6,6 +6,8 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
+require 'dotenv'
+Dotenv.load
 require 'rubygems'
 
 require 'uri'
@@ -27,6 +29,8 @@ require 'pry-byebug'
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
+TWILIO_SID = ENV['TWILIO_SID']
+TWILIO_TOKEN = ENV['TWILIO_TOKEN']
 
 configure do
   # By default, Sinatra assumes that the root is the file that calls the configure block.
