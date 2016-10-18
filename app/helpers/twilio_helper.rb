@@ -23,7 +23,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a dollar amount and a phone number, as '20.09 4155558551'. To change secret code, reply with 'ChangeSECRET'."
+      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change secret code, reply with 'ChangeSECRET'."
       )
   end
 
