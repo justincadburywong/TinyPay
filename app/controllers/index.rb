@@ -5,10 +5,10 @@ end
 post '/reply' do
     body = params["Body"].split(' ')
     csbody = params["Body"].split(', ')
-  if body[0].downcase == "help"
+  if body[0].downcase == "tiny"
     #help
-    send_help_text
-    @route = "HELP"
+    send_tiny_text
+    @route = "TINY"
     erb :debug
   elsif body[0].downcase == "setup"
     #initial setup entry point
