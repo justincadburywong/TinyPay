@@ -4,15 +4,15 @@ helpers do
   account_sid = TWILIO_SID
   auth_token = TWILIO_TOKEN
   client = Twilio::REST::Client.new account_sid, auth_token
-
-  from = "4152752620"
+  message_body = params["Body"]
+  from_number = params["From"]
+  twilio_number = "14152752620"
 
     client.account.messages.create(
-      :from => from,
-      :to => @user.phone,
-      :body => "Welcome to Naebrz, #{@user.first_name}!  Create an event or browse other's events!"
+      :from => twilio_number,
+      :to => from_number,
+      :body => "Hello there, thanks for texting me. Your number is #{from_number}."
     )
-    puts "Sent message to #{@user.first_name} / #{@user.phone}."
   end
 
   def send_join_text
