@@ -3,7 +3,12 @@ get '/' do
 end
 
 post '/reply' do
-  send_welcome_text
+    p params["Body"]
+  # if params["Body"].includes("help".downcase)
+    send_welcome_text
+    @success = "Success!"
+    redirect '/'
+  # end
 end
 
 private
