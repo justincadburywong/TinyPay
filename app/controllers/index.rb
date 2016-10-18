@@ -3,7 +3,7 @@ get '/' do
 end
 
 post '/reply' do
-    p params["Body"]
+    # p params["Body"]
   # if params["Body"].includes("help".downcase)
     send_welcome_text
     @success = "Success!"
