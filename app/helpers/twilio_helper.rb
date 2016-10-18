@@ -14,7 +14,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Sorry, you mis-typed something. Please check your spelling and send the text again."
+      :body => "Sorry, you mis-typed something. Please check your spelling and start over again."
       )
   end
 
