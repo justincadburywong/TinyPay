@@ -18,21 +18,27 @@ post '/reply' do
   elsif body[0].match(/\d{16}/) && body[1].match(/\d{6}/) && body[2].match(/\d{3}/)
     #first section of setting up account
     #save session[:user] of User.new(card_number: body[0], expiry: body[1], cvv: body[2])
+    session[:account] = body
     send_billing_text
     @route = "Credit card entry done.  On to billing."
     erb :debug
   elsif csbody[0].match(/\D+/) && body[-1].match(/\d{5}/)
     #second section of account setup
     #billing info.  set session[:address] of User.new(name: csbody[0], address: csbody[1], city: csbody[2], state: csbody[3], zip: csbody[4])
+    session[:user] = csbody
     send_setup_password_text
     @route = "Billing complete.  Sent password text"
     erb :debug
   elsif body[0] == body[1]
     #this is to check for password.  if they match, save everything to the DB.
-    # User.create(all.the.sessions.)
-    send_confirmation_text
-    @route = "Confirmed.  Account created."
-    erb :debug
+    new_user = User.new(full_name: session[:user][0], address: session[:user][1], city: session[:user][2], state: session[:user][3], zip: session[:user][4], phone: params["From"], account_number: session[:account][0], expiry: session[:account][1], cvv: session[:account][2], password: body[0])
+    if new_user.save
+      send_confirmation_text
+      @route = "Confirmed.  Account created."
+      erb :debug
+    else
+      send_error_text
+    end
   elsif body[0].match(/\d{10}/) && body[1].match(/\d+/)
     #start sending money
     send_password_text
@@ -44,6 +50,8 @@ post '/reply' do
     erb :debug
   else
     send_error_text
+    session[:user] = nil
+    session[:account] = nil
     @route = "ERROR"
     erb :debug
   end
