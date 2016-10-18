@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # Remember to create a migration!
-  include BCrpyt
+  include BCrypt
   has_secure_password
   before_save { self.full_name = email.downcase }
   before_save { self.address = address.downcase }
