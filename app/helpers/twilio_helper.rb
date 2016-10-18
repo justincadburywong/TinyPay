@@ -69,7 +69,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "To confirm money transfer of #{@body[1]} to #{@body[0]}, reply with your phone number and password."
+      :body => "To confirm money transfer of #{@body[1].to_s} to #{@body[0].to_s}, reply with your phone number and password."
       )
   end
 
