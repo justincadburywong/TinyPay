@@ -18,4 +18,7 @@ class User < ActiveRecord::Base
                     presence: true,
                     length: { maximum: 16, minimum: 16 },
                     format: { with: VALID_ACCOUNT_NUMBER_REGEX}
+
+  validates :password, presence: true,
+                    length: { minimum: 6 }
 end

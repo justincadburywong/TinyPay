@@ -23,7 +23,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change secret code, reply with 'ChangeSECRET'. Reply 'STOP' to unsubscribe."
+      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change password code, reply with 'ChangePassword'. Reply 'STOP' to unsubscribe."
       )
   end
 
@@ -46,7 +46,7 @@ helpers do
     )
   end
 
-  def send_setup_secret_text
+  def send_setup_password_text
     twilio
     @client.account.messages.create(
       :from => @twilio_number,
@@ -64,12 +64,12 @@ helpers do
       )
   end
 
-  def send_secret_text
+  def send_password_text
     twilio
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "To confirm money transfer of #{@message_body[1]} to #{@message_body[0]}, reply with your phone number and secret code."
+      :body => "To confirm money transfer of #{@message_body[1]} to #{@message_body[0]}, reply with your phone number and password."
       )
   end
 

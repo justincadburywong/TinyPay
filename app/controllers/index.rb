@@ -24,23 +24,23 @@ post '/reply' do
   elsif csbody[0].match(/\D+/) && body[-1].match(/\d{5}/)
     #second section of account setup
     #billing info.  set session[:address] of User.new(name: csbody[0], address: csbody[1], city: csbody[2], state: csbody[3], zip: csbody[4])
-    send_setup_secret_text
-    @route = "Billing complete.  Sent secret text"
+    send_setup_password_text
+    @route = "Billing complete.  Sent password text"
     erb :debug
   elsif body[0] == body[1]
-    #this is to check for secret code.  if they match, save everything to the DB.
+    #this is to check for password.  if they match, save everything to the DB.
     # User.create(all.the.sessions.)
     send_confirmation_text
     @route = "Confirmed.  Account created."
     erb :debug
   elsif body[0].match(/\d{10}/) && body[1].match(/\d+/)
     #start sending money
-    send_secret_text
-  elsif body[0] == params["From"] && body[1] == User.find_by(phone: params["From"]).secret_code
+    send_password_text
+  elsif body[0] == params["From"] && body[1] == User.find_by(phone: params["From"]).password
     #mastercard API call to send money with User.credentials and params["Body"][1] amount
     send_sent_text
-  elsif body[0].downcase == "changesecret"
-    @route = "SECRET"
+  elsif body[0].downcase == "changepassword"
+    @route = "changePASSWORD"
     erb :debug
   else
     send_error_text
