@@ -34,17 +34,26 @@ post '/reply' do
     new_user = User.new(full_name: session[:user][0], address: session[:user][1], city: session[:user][2], state: session[:user][3], zip: session[:user][4], phone: params["From"], account_number: session[:account][0], expiry: session[:account][1], cvv: session[:account][2], password: body[0])
     if new_user.save
       send_confirmation_text
+      session[:user] = nil
+      session[:account] = nil
       @route = "Confirmed.  Account created."
       erb :debug
     else
       send_error_text
+      @route = "Error creating account"
+      erb :debug
     end
   elsif body[0].match(/\d{10}/) && body[1].match(/\d+/)
     #start sending money
     send_password_text
+    @route = "Start sending money"
+    erb :debug
   elsif body[0] == params["From"] && body[1] == User.find_by(phone: params["From"]).password
     #mastercard API call to send money with User.credentials and params["Body"][1] amount
     send_sent_text
+    @route = "Money successfully sent"
+
+    erb :debug
   elsif body[0].downcase == "changepassword"
     @route = "changePASSWORD"
     erb :debug
@@ -52,7 +61,7 @@ post '/reply' do
     send_error_text
     session[:user] = nil
     session[:account] = nil
-    @route = "ERROR"
+    @route = "Major General ERROR"
     erb :debug
   end
 end
