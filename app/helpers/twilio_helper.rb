@@ -18,12 +18,12 @@ helpers do
       )
   end
 
-  def send_help_text
+  def send_tiny_text
     twilio
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change secret code, reply with 'ChangeSECRET'."
+      :body => "Welcome to TinyPay! To set up account, reply with 'Setup'.  To send money, enter a phone number and dollar amount, as '4155558551 20.09'. To change secret code, reply with 'ChangeSECRET'. Reply 'STOP' to unsubscribe."
       )
   end
 
