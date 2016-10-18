@@ -4,7 +4,7 @@ helpers do
     account_sid = TWILIO_SID
     auth_token = TWILIO_TOKEN
     @client = Twilio::REST::Client.new account_sid, auth_token
-    @message_body = params["Body"]
+    @body = params["Body"]
     @twilio_number = "14152752620"
     @from_number = params["From"]
   end
@@ -69,7 +69,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "To confirm money transfer of #{@message_body[1]} to #{@message_body[0]}, reply with your phone number and password."
+      :body => "To confirm money transfer of #{@body[1]} to #{@body[0]}, reply with your phone number and password."
       )
   end
 
@@ -78,7 +78,7 @@ helpers do
     @client.account.messages.create(
       :from => @twilio_number,
       :to => @from_number,
-      :body => "Money sent.  $#{@message_body[1]} has been sent to #{@message_body[0]}.  For security purposes, please delete this conversation."
+      :body => "Money sent.  $#{@body[1]} has been sent to #{@body[0]}.  For security purposes, please delete this conversation."
       )
   end
 
