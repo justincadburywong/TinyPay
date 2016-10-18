@@ -1,16 +1,21 @@
 <div class="container">
-  This is the Testpay API.
-  Send all of your texts to +14152752620 to begin sending monies.
+  <p>This is the TinyTest API.</p>
+  <p>Send all of your texts to +14152752620 to begin sending monies.</p>
 
 
-  Test this out:
+  <p>Test it out:</p>
   <form action="/reply" method="post">
-    <label>Enter a phone number</label>
+    <label>Enter your phone number</label>
     <input type="text" name="From">
     <br>
     <label>Enter a text message</label>
     <input type="text" name="Body">
+    <br>
     <input type="submit" action="submit" name="Go!">
   </form>
 
+
+  <% if @success %>
+    <%= @success %>
+  <% end %>
 </div>
