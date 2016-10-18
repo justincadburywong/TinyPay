@@ -4,7 +4,7 @@ helpers do
     account_sid = TWILIO_SID
     auth_token = TWILIO_TOKEN
     @client = Twilio::REST::Client.new account_sid, auth_token
-    message_body = params["Body"]
+    @message_body = params["Body"]
     @twilio_number = "14152752620"
     @from_number = params["From"]
   end
@@ -46,7 +46,7 @@ helpers do
     )
   end
 
-  def send_secret_text
+  def send_setup_secret_text
     twilio
     @client.account.messages.create(
       :from => @twilio_number,
@@ -54,34 +54,36 @@ helpers do
       :body => "Lastly, set a secret password, with a minimum of 6 digits, repeated twice for confirmation.  Reply such as '123456 123456'."
       )
   end
-  #
-  # def start_transfer do
-  #   body = params['Body']
-  #   from = params['From']
-  #   reply = Twilio::TwiML::Response.new do |r|
+
+  def send_confirmation_text
+    twilio
+    @client.account.messages.create(
+      :from => @twilio_number,
+      :to => @from_number,
+      :body => "You're ready to start sending money! To send money, reply with the 10 digit phone number and dollar amount, like this: 4155558551 20.09."
+      )
+  end
+
+  def send_secret_text
+    twilio
+    @client.account.messages.create(
+      :from => @twilio_number,
+      :to => @from_number,
+      :body => "To confirm money transfer of #{@message_body[1]} to #{@message_body[0]}, reply with your phone number and secret code."
+      )
+  end
+
+  def send_sent_text
+    twilio
+    @client.account.messages.create(
+      :from => @twilio_number,
+      :to => @from_number,
+      :body => "Money sent.  $#{@message_body[1]} has been sent to #{@message_body[0]}.  For security purposes, please delete this conversation."
+      )
+  end
+
+
+
   #     if body.match(/\A(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\z/)
-  #       # find
-  #       r.Message "Please enter a secret code that will be used to confirm your trannsfers."
-  #     elsif body == "REGEX ANY PHONE NUMBER AND DOLLAR AMOUNT"
-  #       r.Message "You are about to send #{@money} to #{@phone.number}.  Please enter your secret code to confirm."
-  #       session[:transfer] +=1
-  #     end
-  #   end
-  #   reply.text
-  # end
-  #
-  # def confirm_transfer do
-  #   body = params['Body']
-  #   from = params['From']
-  #   reply = Twilio::TwiML::Response.new do |r|
-  #     if body == "secret code"
-  #       r.Message "Your moneies has been transferred."
-  #       session[:transfer] -=1
-  #     elsif body == "NOT SECRET CODE"
-  #       r.Message "We couldn't confirm your code."
-  #     end
-  #   end
-  #   reply.text
-  # end
 
 end
