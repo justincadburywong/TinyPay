@@ -13,6 +13,7 @@ require 'rubygems'
 require 'uri'
 require 'pathname'
 require 'twilio-ruby'
+require 'mastercard_p2p'
 require 'pg'
 require 'active_record'
 require 'logger'
@@ -31,6 +32,10 @@ APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 APP_NAME = APP_ROOT.basename.to_s
 TWILIO_SID = ENV['TWILIO_SID']
 TWILIO_TOKEN = ENV['TWILIO_TOKEN']
+MC_KEY_PASSWORD = ENV['MC_KEY_PASSWORD']
+MC_KEY_ALIAS = ENV['MC_KEY_ALIAS']
+MC_KEY = ENV['MC_KEY']
+MC_PARTNERID = ENV['MC_PARTNERID']
 
 configure do
   # By default, Sinatra assumes that the root is the file that calls the configure block.
