@@ -6,10 +6,10 @@ include MasterCard::Core::Model
 include MasterCard::API::P2p
 
 def main
-    consumerKey = "your consumer key"   # You should copy this from "My Keys" on your project page e.g. UTfbhDCSeNYvJpLL5l028sWL9it739PYh6LU5lZja15xcRpY!fd209e6c579dc9d7be52da93d35ae6b6c167c174690b72fa
-    keyFile = "path to your .p12 private key file" # e.g. /Users/yourname/project/sandbox.p12 | C:\Users\yourname\project\sandbox.p12
-    keyAlias = "keyalias"   # For production: change this to the key alias you chose when you created your production key
-    keyPassword = "keystorepassword"   # For production: change this to the key alias you chose when you created your production key
+    consumerKey = MC_KEY   # You should copy this from "My Keys" on your project page e.g. UTfbhDCSeNYvJpLL5l028sWL9it739PYh6LU5lZja15xcRpY!fd209e6c579dc9d7be52da93d35ae6b6c167c174690b72fa
+    keyFile = /Users/justinwong/Documents/phase-4ever/testpay-sinatra/hackathonalias_sandbox.p12 # e.g. /Users/yourname/project/sandbox.p12 | C:\Users\yourname\project\sandbox.p12
+    keyAlias = MC_KEY_ALIAS   # For production: change this to the key alias you chose when you created your production key
+    keyPassword = MC_KEY_PASSWORD   # For production: change this to the key alias you chose when you created your production key
     auth = OAuth::OAuthAuthentication.new(consumerKey, keyFile, keyAlias, keyPassword)
     Config.setAuthentication(auth)
 
